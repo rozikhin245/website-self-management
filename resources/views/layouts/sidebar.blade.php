@@ -1,5 +1,5 @@
 <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-screen mt-[65px] pt-5 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 shadow-lg">
+    class="fixed top-0 left-0 z-40 w-64 h-screen mt-[82px] pt-5 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 shadow-lg">
     <div class="h-full px-4 pb-6 overflow-y-auto bg-white">
         <ul class="space-y-2 font-medium">
             <li>
@@ -41,7 +41,7 @@
                 </a>
             </li>
             <li>
-                <a href="" class="flex items-center p-3 text-gray-900 rounded-lg hover:bg-gray-200 transition duration-300">
+                <a href="{{ route('todolist.index')}}" class="flex items-center p-3 text-gray-900 rounded-lg hover:bg-gray-200 transition duration-300">
                     <svg class="w-6 h-6 text-gray-600 group-hover:text-gray-800 transition duration-300" 
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
                         fill="currentColor" viewBox="0 0 24 24">

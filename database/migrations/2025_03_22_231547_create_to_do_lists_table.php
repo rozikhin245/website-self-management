@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('to_do_lists', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->text('description');
+            $table->string('category');
+            $table->enum('status', ['pending', 'completed']);
+            $table->enum('priority', ['normal', 'urgent']);
+            $table->date('date');
             $table->timestamps();
         });
     }

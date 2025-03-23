@@ -14,64 +14,62 @@
                     </svg>
                 </button>
                 <a href="https://flowbite.com" class=" ms-2 md:me-24 hidden sm:flex">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
-                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">Flowbite</span>
+                    <img src="img/logo.png" class="h-8 me-3" alt="FlowBite Logo" />
+                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">Trekka </span>
                 </a>
             </div>
-            <div class="flex items-center">
-                <div class="flex items-center ms-3">
-                    <div class="h-auto w-auto flex items-center justify-center space-x-1 bg-white border border-gray-200 py-1 px-3 rounded-lg">
-                        <button type="button" 
-                            class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
-                            aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                            <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-                        </button>
-                        <div class="max-w-[120px] overflow-hidden cursor-pointer" aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                            <p class="text-xs text-gray-900 truncate" role="none">
-                                <marquee behavior="scroll" direction="left" scrollamount="1" class="text-sm font-semibold text-gray-900">
-                                    {{ Auth::user()->name }}
-                                </marquee>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm"
-                        id="dropdown-user">
-                        <div class="px-4 py-3" role="none">
-                            <p class="text-sm text-gray-900" role="none">
-                                {{ Auth::user()->name }}
-                            </p>
-                            <p class="text-sm font-medium text-gray-900 truncate" role="none">
-                                {{ Auth::user()->email }}
-                            </p>
-                        </div>
-                        <ul class="py-1" role="none">
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    role="menuitem">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    role="menuitem">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    role="menuitem">Earnings</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    role="menuitem">Sign out</a>
-                            </li>
-                        </ul>
+            <div class="relative flex items-center">
+                <!-- Button Avatar & Nama -->
+                <div
+                    class="flex items-center space-x-3 bg-white border border-gray-300 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all">
+                    <button type="button"
+                        class="flex items-center text-sm rounded-full focus:ring-4 focus:ring-gray-300 transition-all"
+                        aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                        <img class="w-10 h-10 rounded-full border border-gray-400 hover:scale-105 transition-all"
+                            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                    </button>
+
+                    <!-- Username -->
+                    <div class="max-w-[150px] cursor-pointer select-none" aria-expanded="false"
+                        data-dropdown-toggle="dropdown-user">
+                        <p class="text-sm font-semibold text-gray-900 truncate" role="none">
+                            {{ Str::limit(Auth::user()->name, 18, '...') }}
+                        </p>
                     </div>
                 </div>
+
+                <!-- Dropdown Menu -->
+                <div class="absolute right-0 mt-3 hidden w-56 bg-white border border-gray-200 rounded-xl shadow-lg transition-all z-50"
+                    id="dropdown-user">
+                    <div class="px-4 py-3">
+                        <p class="text-sm font-semibold text-gray-900 truncate">
+                            {{ Str::limit(Auth::user()->name, 22, '...') }}
+                        </p>
+                        <p class="text-xs text-gray-500 truncate">
+                            {{ Str::limit(Auth::user()->email, 25, '...') }}
+                        </p>
+                    </div>
+                    <ul class="py-1">
+                        <li>
+                            <a href="{{ route('profile.edit')}}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-all">
+                                Profile
+                            </a>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit"
+                                    class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 rounded-lg transition-all">
+                                    Log Out
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </div>
+
+
         </div>
     </div>
 </nav>

@@ -7,6 +7,7 @@ use App\Http\Controllers\financeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\toDoListController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/favorite/{diary}', [FavoriteController::class, 'toggleFavorite'])->name('favorite.toggle');
     Route::get('/favorite-diaries', [FavoriteController::class, 'favoriteDiaries'])->name('favorite.index');
+
+    Route::resource('/todolist', toDoListController::class);
 });
 
 require __DIR__ . '/auth.php';
