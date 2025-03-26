@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->text('description');
-            $table->string('category');
-            $table->enum('status', ['pending', 'completed']);
-            $table->enum('priority', ['normal', 'urgent']);
+            $table->text('description')->nullable();
+            $table->string('category')->nullable();
+            $table->enum('status', ['pending', 'completed'])->nullable();
+            $table->enum('priority', ['normal', 'urgent'])->nullable();
             $table->date('date');
             $table->timestamps();
         });

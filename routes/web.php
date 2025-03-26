@@ -2,12 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DiaryController;
+use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\targetController;
 use App\Http\Controllers\financeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\toDoListController;
+use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\OpenRouterController;
+use App\Http\Controllers\TogetherAIController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/favorite-diaries', [FavoriteController::class, 'favoriteDiaries'])->name('favorite.index');
 
     Route::resource('/todolist', toDoListController::class);
+
+    // Route::get('/', [OpenRouterController::class, 'index']);
+    // Route::post('/generate', [OpenRouterController::class, 'generateText']);
 });
 
 require __DIR__ . '/auth.php';

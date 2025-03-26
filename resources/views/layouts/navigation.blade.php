@@ -18,58 +18,54 @@
                     <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">Trekka </span>
                 </a>
             </div>
-            <div class="relative flex items-center">
-                <!-- Button Avatar & Nama -->
-                <div
-                    class="flex items-center space-x-3 bg-white border border-gray-300 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all">
-                    <button type="button"
-                        class="flex items-center text-sm rounded-full focus:ring-4 focus:ring-gray-300 transition-all"
-                        aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                        <img class="w-10 h-10 rounded-full border border-gray-400 hover:scale-105 transition-all"
-                            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-                    </button>
-
-                    <!-- Username -->
-                    <div class="max-w-[150px] cursor-pointer select-none" aria-expanded="false"
-                        data-dropdown-toggle="dropdown-user">
-                        <p class="text-sm font-semibold text-gray-900 truncate" role="none">
-                            {{ Str::limit(Auth::user()->name, 18, '...') }}
-                        </p>
-                    </div>
+            <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
+                class="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full space-x-1 hover:text-blue-600 md:me-0 focus:ring-2 focus:ring-gray-100"
+                type="button">
+                <span class="sr-only">Open user menu</span>
+                <img class="w-10 h-10 rounded-full border border-gray-400 a transition-all"
+                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                <div>
+                    {{ Str::limit(Auth::user()->name, 22, '...') }}
                 </div>
 
-                <!-- Dropdown Menu -->
-                <div class="absolute right-0 mt-3 hidden w-56 bg-white border border-gray-200 rounded-xl shadow-lg transition-all z-50"
-                    id="dropdown-user">
-                    <div class="px-4 py-3">
-                        <p class="text-sm font-semibold text-gray-900 truncate">
-                            {{ Str::limit(Auth::user()->name, 22, '...') }}
-                        </p>
-                        <p class="text-xs text-gray-500 truncate">
-                            {{ Str::limit(Auth::user()->email, 25, '...') }}
-                        </p>
-                    </div>
-                    <ul class="py-1">
-                        <li>
-                            <a href="{{ route('profile.edit')}}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-all">
-                                Profile
-                            </a>
-                        </li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit"
-                                    class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 rounded-lg transition-all">
-                                    Log Out
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 4 4 4-4" />
+                </svg>
+            </button>
+
+
+
+        </div>
+
+
+
+
+
+        <!-- Dropdown menu -->
+        <div id="dropdownAvatarName" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-52">
+            <div class="px-4 py-3 text-sm text-gray-900">
+                <div class="font-medium ">{{ Str::limit(Auth::user()->name, 22, '...') }}</div>
+                <div class="truncate">{{ Str::limit(Auth::user()->email, 25, '...') }}</div>
             </div>
-
-
+            <ul class="py- text-sm text-gray-700" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                <li>
+                    <a href="{{ route('profile.edit') }}"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-all">
+                        Profile
+                    </a>
+                </li>
+            </ul>
+            <div class="py-">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit"
+                        class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 rounded-lg transition-all">
+                        Log Out
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>

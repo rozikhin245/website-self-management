@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ToDoList;
+use App\Models\to_do_list;
 use Illuminate\Http\Request;
 
 class toDoListController extends Controller
@@ -11,7 +13,13 @@ class toDoListController extends Controller
      */
     public function index()
     {
-        return view('ToDoList.index');
+        $userId = auth()->id();
+        $tasks = ToDoList::all();
+        // $tasks = ToDoList::where('user_id', $userId)->where('status', 'pending')->get();
+        $sukses = ToDoList::where('user_id', $userId)->where('status', 'completed')->get();
+
+        // $panding = ToDoList::where('user_id', $userId)->where('status', 'pending');
+        return view('ToDoList.index', compact('tasks'));
     }
 
     /**
@@ -27,7 +35,27 @@ class toDoListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'category' => 'nullable|string|max:255',
+            'status' => 'required|string|in:completed,pending',
+            'priority' => 'required|string|in:normal,urgent',
+            'date' => 'required|date',
+        ]);
+
+        ToDoList::create([
+            'user_id' => auth()->id(), // Ambil ID pengguna yang sedang login
+            'title' => $request->title,
+            'description' => $request->description,
+            'category' => $request->category,
+            'status' => $request->status,
+            'priority' => $request->priority,
+            'date' => $request->date,
+        ]);
+
+        return redirect()->route('todolist.index')->with('success', 'Tugas berhasil ditambahkan!');
     }
 
     /**
@@ -51,7 +79,14 @@ class toDoListController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'status' => 'required|string|in:pending,in_progress,completed',
+        ]);
+
+        $task = ToDoList::findOrFail($id);
+        $task->update($request->all());
+
+        return redirect()->route('todolist.index')->with('success', 'Tugas berhasil diperbarui!');
     }
 
     /**
@@ -59,6 +94,9 @@ class toDoListController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $task = ToDoList::findOrFail($id);
+        $task->delete();
+
+        return redirect()->route('todolist.index')->with('success', 'Tugas berhasil dihapus!');
     }
 }
